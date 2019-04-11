@@ -1,3 +1,4 @@
+import { ServerServiceService } from './services/server-service.service';
 import { Component } from '@angular/core';
 
 declare global {
@@ -13,6 +14,8 @@ export class AppComponent {
   title = 'hack-app';
   description : String = '';
 
+    constructor(private serverService:ServerServiceService){
+    }
 
   update() {
       window.fbAsyncInit = () => {
@@ -80,10 +83,13 @@ export class AppComponent {
         //#endregion
 
       });
+    
     }
 
+  }
 
-
+  talkToServer(){
+    this.serverService.sendRequest();
   }
 
 }
