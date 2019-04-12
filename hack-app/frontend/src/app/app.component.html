@@ -1,2 +1,4 @@
 <input [(ngModel)]="description" type="text">
-<button (click)="talkToServer()">Update Status</button>
+<button (click)="talkToServer()">Talk to server</button>
+<button (click)="goToFacebook()">reach to facebook</button>
+<plotly-example *ngIf="toShowPlot" [graph]='graph'></plotly-example>
