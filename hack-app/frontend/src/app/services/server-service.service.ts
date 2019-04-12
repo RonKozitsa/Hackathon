@@ -23,7 +23,7 @@ export class ServerServiceService {
     };
 
     return this.http.post('http://localhost:4000/', documents).subscribe(response => {
-      let response_data = response;
+      let response_data : any = response;
       response_data.documents.forEach(message => {
         message_array.push(message.score);
         this.helper.setHelper(message_array);

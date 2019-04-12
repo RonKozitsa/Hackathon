@@ -92,7 +92,7 @@ export class AppComponent {
 
   async talkToServer(){
     await this.serverService.sendRequest(this.comments);
-    this.showPlot(this.helper.getHelper);
+    this.showPlot(this.helper.getHelper());
   }
 
   showPlot(message_array){
