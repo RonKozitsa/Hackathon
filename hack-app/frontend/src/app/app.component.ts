@@ -90,8 +90,8 @@ export class AppComponent {
 
   }
 
-  async talkToServer(){
-    await this.serverService.sendRequest(this.comments);
+  talkToServer(){
+    this.serverService.sendRequest(this.comments);
     this.showPlot(this.helper.getHelper());
   }
 
@@ -160,6 +160,8 @@ export class AppComponent {
     };
 
     this.graph = {data , layout}
+    console.log(this.graph);
+    
     this.toShowPlot = true;
 
   }
