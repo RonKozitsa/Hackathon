@@ -8,7 +8,7 @@ var data_response = 'no data';
 
 const app = express();
 const port = 4000;
-let accessKey = '1e0346577e81416ba5a43f8ea1d9ba0b';
+let accessKey = 'fake-access-key'; // access key - change to real one 
 let uri = 'westcentralus.api.cognitive.microsoft.com';
 let path = '/text/analytics/v2.0/sentiment';
 

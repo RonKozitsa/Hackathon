@@ -16,7 +16,11 @@ export class AppComponent {
   description : String = '';
   comments : Array<any> = [];
   toShowPlot = false;
+  email = '';
+  public_transit ='';
   graph = {};
+  phone = '';
+  about = '';
 
   constructor(private serverService:ServerServiceService, private helper: RonsHelperService){
   }
@@ -24,12 +28,12 @@ export class AppComponent {
   goToFacebook() {
       window.fbAsyncInit = () => {
         FB.init({
-          appId: '1160904094076285',
+          appId: 'fake-app-id', // change to real app-id
           cookie: true,
           xfbml: true,
           version: 'v3.2'
         });
-        getData(this.description);
+        getData(this.description,this.phone,this.email,this.public_transit,this.about);
       }; 
 
       (function (d, s, id) {
@@ -40,36 +44,38 @@ export class AppComponent {
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
-    let getData = (description) => {
-      const ACCESS_TOKEN = 'EAAQf1gwlTX0BAMfpausNA3pau1OFOgZCipPYclvWB8XQTBEmXoqTWeQOQW4JtZAnUWDqDx4SKwXHKtCzUAdNKNcUoxhp8DZAzNgmWXuHB4gXsMZAfvhsrftTfKZAcNtOZBVKZB0EgLdwtCCVMtSIkzYMF3oTXHtemvpn9JpKbuzjFE2jq9yXkTIx2YpH9SnVGGasQYvsisDSQZDZD';
+    let getData = (description,phone,email,public_transit,about) => {
+      const ACCESS_TOKEN = 'fake-access-token'; //change to real one 
       FB.getLoginStatus((response) => {
         //#region post description
-          // FB.api(
-          //   `/452071725334114?access_token=${ACCESS_TOKEN}`,
-          //   'POST',
-          //   { "description": description },
-          //   (_response) => {
-          //   }
-          // );
+          FB.api(
+            `/452071725334114?access_token=${ACCESS_TOKEN}`,
+            'POST',
+            { "description": description, "phone": phone, "emails": [email], "public_transit": public_transit, "about":about },
+            (response) => {
+              console.log(response);
+              
+            }
+          );
         //#endregion
 
         //#region Get comments
-          FB.api(
-            `/452071725334114?access_token=${ACCESS_TOKEN}`,
-            'GET',
-            { "fields": "published_posts{comments}" },
-            (response) => {
-                if(response.published_posts && response.published_posts.data){
-                    response.published_posts.data.forEach(x => {
-                        if (x.comments) {
-                            x.comments.data.forEach(y => {
-                              this.comments.push(y.message);       
-                            })
-                        }
-                    });
-                }
-            }
-          );
+          // FB.api(
+          //   `/452071725334114?access_token=${ACCESS_TOKEN}`,
+          //   'GET',
+          //   { "fields": "published_posts{comments}" },
+          //   (response) => {
+          //       if(response.published_posts && response.published_posts.data){
+          //           response.published_posts.data.forEach(x => {
+          //               if (x.comments) {
+          //                   x.comments.data.forEach(y => {
+          //                     this.comments.push(y.message);       
+          //                   })
+          //               }
+          //           });
+          //       }
+          //   }
+          // );
         //#endregion
 
         //#region - Update phone
@@ -160,8 +166,6 @@ export class AppComponent {
     };
 
     this.graph = {data , layout}
-    console.log(this.graph);
-    
     this.toShowPlot = true;
 
   }

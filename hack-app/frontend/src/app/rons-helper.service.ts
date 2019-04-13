@@ -7,7 +7,6 @@ export class RonsHelperService {
   helper = [];
 
   constructor() { 
-
   }
 
   setHelper(data){
